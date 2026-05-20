@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Flores Car Care Tracker</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:Arial, sans-serif;
+      background:#121212;
+      color:white;
+      padding-bottom:40px;
+    }
+
+    header{
+      background:#b30000;
+      padding:25px;
+      text-align:center;
+      box-shadow:0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    header h1{
+      font-size:34px;
+      margin-bottom:5px;
+    }
+
+    header p{
+      color:#d9d9d9;
+      font-size:14px;
+    }
+
+    .container{
+      width:90%;
+      max-width:1100px;
+      margin:30px auto;
+    }
+
+    .card{
+      background:#1f1f1f;
+      padding:25px;
+      border-radius:14px;
+      margin-bottom:25px;
+      box-shadow:0 0 12px rgba(0,0,0,0.4);
+    }
+
+    h2{
+      margin-bottom:20px;
+      color:#ff4d4d;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+    }
+
+    input, select{
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:8px;
+      background:#2c2c2c;
+      color:white;
+      font-size:15px;
+    }
+
+    button{
+      width:100%;
+      margin-top:20px;
+      padding:14px;
+      border:none;
+      border-radius:8px;
+      background:#b30000;
+      color:white;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    button:hover{
+      background:#e60000;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:15px;
+    }
+
+    th, td{
+      padding:14px;
+      text-align:left;
+      border-bottom:1px solid #333;
+      font-size:14px;
+    }
+
+    th{
+      color:#ff6666;
+    }
+
+    .good{
+      color:lightgreen;
+      font-weight:bold;
+    }
+
+    .warning{
+      color:gold;
+      font-weight:bold;
+    }
+
+    .bad{
+      color:#ff4d4d;
+      font-weight:bold;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:15px;
+      margin-bottom:25px;
+    }
+
+    .stat-box{
+      background:#1f1f1f;
+      padding:20px;
+      border-radius:14px;
+      text-align:center;
+    }
+
+    .stat-box h3{
+      color:#ff6666;
+      margin-bottom:10px;
+    }
+
+    .stat-box p{
+      font-size:24px;
+      font-weight:bold;
+    }
+
+    @media(max-width:700px){
+
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      table{
+        font-size:12px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Flores Car Care Tracker</h1>
+  <p>Track maintenance, mileage, costs, and service intervals.</p>
+</header>
+
+<div class="container">
+
+  <!-- Stats -->
+
+  <div class="stats">
+
+    <div class="stat-box">
+      <h3>Total Services</h3>
+      <p id="totalServices">0</p>
+    </div>
+
+    <div class="stat-box">
+      <h3>Total Spent</h3>
+      <p id="totalSpent">$0</p>
+    </div>
+
+    <div class="stat-box">
+      <h3>Overdue Services</h3>
+      <p id="overdueCount">0</p>
+    </div>
+
+  </div>
+
+  <!-- Form -->
+
+  <div class="card">
+
+    <h2>Add Maintenance Record</h2>
+
+    <div class="grid">
+
+      <input type="text" id="car" placeholder="Vehicle (Example: 2007 Acura TL)">
+
+      <input type="text" id="owner" placeholder="Owner Name">
+
+      <select id="service">
+
+        <option>Oil Change</option>
+        <option>Timing Belt</option>
+        <option>Transmission Service</option>
+        <option>Brake Service</option>
+        <option>Coolant Flush</option>
+        <option>Tire Rotation</option>
+        <option>Spark Plugs</option>
+
+      </select>
+
+      <input type="number" id="mileage" placeholder="Current Mileage">
+
+      <input type="number" id="lastService" placeholder="Mileage of Last Service">
+
+      <input type="number" id="cost" placeholder="Service Cost ($)">
+
+    </div>
+
+    <button onclick="addService()">Add Service Record</button>
+
+  </div>
+
+  <!-- Table -->
+
+  <div class="card">
+
+    <h2>Maintenance History</h2>
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Vehicle</th>
+          <th>Owner</th>
+          <th>Service</th>
+          <th>Mileage</th>
+          <th>Cost</th>
+          <th>Status</th>
+        </tr>
+
+      </thead>
+
+      <tbody id="tableBody">
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+<script>
+
+  let totalServices = 0;
+  let totalSpent = 0;
+  let overdueServices = 0;
+
+  function addService(){
+
+    const car = document.getElementById("car").value;
+    const owner = document.getElementById("owner").value;
+    const service = document.getElementById("service").value;
+
+    const mileage = parseInt(document.getElementById("mileage").value);
+    const lastService = parseInt(document.getElementById("lastService").value);
+
+    const cost = parseFloat(document.getElementById("cost").value);
+
+    if(
+      car === "" ||
+      owner === "" ||
+      isNaN(mileage) ||
+      isNaN(lastService) ||
+      isNaN(cost)
+    ){
+      alert("Please complete all fields.");
+      return;
+    }
+
+    const milesSince = mileage - lastService;
+
+    let interval = 0;
+
+    if(service === "Oil Change"){
+      interval = 5000;
+    }
+    else if(service === "Timing Belt"){
+      interval = 100000;
+    }
+    else if(service === "Transmission Service"){
+      interval = 30000;
+    }
+    else if(service === "Spark Plugs"){
+      interval = 60000;
+    }
+    else{
+      interval = 30000;
+    }
+
+    let status = "";
+    let statusClass = "";
+
+    if(milesSince >= interval){
+
+      status = "OVERDUE";
+      statusClass = "bad";
+      overdueServices++;
+
+    }
+    else if(milesSince >= interval * 0.8){
+
+      status = "DUE SOON";
+      statusClass = "warning";
+
+    }
+    else{
+
+      status = "GOOD";
+      statusClass = "good";
+
+    }
+
+    totalServices++;
+    totalSpent += cost;
+
+    document.getElementById("totalServices").innerText = totalServices;
+    document.getElementById("totalSpent").innerText = "$" + totalSpent.toFixed(2);
+    document.getElementById("overdueCount").innerText = overdueServices;
+
+    const row = `
+      <tr>
+        <td>${car}</td>
+        <td>${owner}</td>
+        <td>${service}</td>
+        <td>${mileage.toLocaleString()} mi</td>
+        <td>$${cost.toFixed(2)}</td>
+        <td class="${statusClass}">${status}</td>
+      </tr>
+    `;
+
+    document.getElementById("tableBody").innerHTML += row;
+
+    // Clear Inputs
+
+    document.getElementById("car").value = "";
+    document.getElementById("owner").value = "";
+    document.getElementById("mileage").value = "";
+    document.getElementById("lastService").value = "";
+    document.getElementById("cost").value = "";
+
+  }
+
+</script>
+
+</body>
+</html>
