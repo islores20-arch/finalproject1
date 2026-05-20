@@ -1,368 +1,759 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Flores Car Care Tracker</title>
+<title>Flores Car Care Tracker</title>
 
-  <style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter', sans-serif;
+    background:#090909;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* Background Effects */
+
+.bg1{
+    position:fixed;
+    width:500px;
+    height:500px;
+    background:rgba(255,0,0,0.08);
+    border-radius:50%;
+    filter:blur(120px);
+    top:-150px;
+    right:-100px;
+    z-index:-2;
+}
+
+.bg2{
+    position:fixed;
+    width:400px;
+    height:400px;
+    background:rgba(255,255,255,0.03);
+    border-radius:50%;
+    filter:blur(120px);
+    bottom:-150px;
+    left:-100px;
+    z-index:-2;
+}
+
+/* Header */
+
+header{
+    width:100%;
+    padding:28px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:rgba(9,9,9,0.75);
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.logo{
+    font-size:30px;
+    font-weight:700;
+    letter-spacing:-1px;
+}
+
+.logo span{
+    color:#ff2d2d;
+}
+
+.tagline{
+    color:#9c9c9c;
+    font-size:14px;
+    margin-top:4px;
+}
+
+/* Layout */
+
+.container{
+    width:90%;
+    max-width:1450px;
+    margin:40px auto;
+}
+
+/* Stats */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.stat-card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.06);
+    backdrop-filter:blur(12px);
+
+    border-radius:24px;
+    padding:28px;
+
+    transition:0.35s ease;
+}
+
+.stat-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,0,0,0.25);
+    box-shadow:0 10px 30px rgba(255,0,0,0.08);
+}
+
+.stat-card h3{
+    color:#9f9f9f;
+    font-size:14px;
+    font-weight:500;
+    margin-bottom:15px;
+}
+
+.stat-card p{
+    font-size:34px;
+    font-weight:700;
+}
+
+/* Cards */
+
+.main-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+}
+
+.card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.06);
+
+    border-radius:28px;
+    padding:30px;
+
+    backdrop-filter:blur(14px);
+
+    transition:0.3s ease;
+}
+
+.card:hover{
+    border-color:rgba(255,0,0,0.2);
+}
+
+.card h2{
+    font-size:25px;
+    margin-bottom:22px;
+}
+
+/* Inputs */
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+input, select{
+    width:100%;
+    padding:15px;
+    border:none;
+    outline:none;
+
+    border-radius:16px;
+
+    background:#161616;
+    color:white;
+
+    font-size:15px;
+
+    transition:0.25s ease;
+
+    border:1px solid transparent;
+}
+
+input:focus,
+select:focus{
+    border:1px solid rgba(255,0,0,0.5);
+    transform:scale(1.01);
+}
+
+button{
+    width:100%;
+    margin-top:20px;
+    padding:16px;
+
+    border:none;
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#ff1a1a,#b30000);
+
+    color:white;
+    font-size:16px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s ease;
+}
+
+button:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 25px rgba(255,0,0,0.25);
+}
+
+/* Garage */
+
+.garage-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:18px;
+}
+
+.garage-card{
+    background:#121212;
+
+    border:1px solid rgba(255,255,255,0.05);
+
+    border-radius:22px;
+    padding:22px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:0.35s ease;
+}
+
+.garage-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,0,0,0.25);
+}
+
+.garage-card::before{
+    content:"";
+
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:4px;
+
+    background:linear-gradient(to right,#ff1a1a,#ff6666);
+}
+
+.garage-card img{
+    width:85px;
+    height:85px;
+
+    object-fit:contain;
+
+    background:white;
+
+    border-radius:14px;
+    padding:10px;
+
+    margin-bottom:18px;
+}
+
+.garage-card h3{
+    margin-bottom:10px;
+    font-size:20px;
+}
+
+.garage-card p{
+    color:#a8a8a8;
+    font-size:14px;
+    margin-bottom:6px;
+}
+
+/* Services */
+
+.service-item{
+    background:#121212;
+
+    border:1px solid rgba(255,255,255,0.05);
+
+    border-radius:20px;
+
+    padding:20px;
+
+    margin-top:18px;
+
+    transition:0.3s ease;
+}
+
+.service-item:hover{
+    transform:translateX(4px);
+    border-color:rgba(255,0,0,0.2);
+}
+
+.service-item h3{
+    margin-bottom:10px;
+}
+
+.progress{
+    width:100%;
+    height:10px;
+
+    background:#222;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    margin-top:14px;
+}
+
+.progress-bar{
+    height:100%;
+    border-radius:30px;
+
+    background:linear-gradient(to right,#ff1a1a,#ff6b6b);
+
+    transition:1s ease;
+}
+
+/* Status */
+
+.good{
+    color:#4dff91;
+    font-weight:600;
+}
+
+.warning{
+    color:#ffd24d;
+    font-weight:600;
+}
+
+.bad{
+    color:#ff5c5c;
+    font-weight:600;
+}
+
+/* Responsive */
+
+@media(max-width:1000px){
+
+    .main-grid{
+        grid-template-columns:1fr;
     }
 
-    body{
-      font-family:Arial, sans-serif;
-      background:#121212;
-      color:white;
-      padding-bottom:40px;
-    }
+}
 
-    header{
-      background:#b30000;
-      padding:25px;
-      text-align:center;
-      box-shadow:0 2px 10px rgba(0,0,0,0.5);
-    }
-
-    header h1{
-      font-size:34px;
-      margin-bottom:5px;
-    }
-
-    header p{
-      color:#d9d9d9;
-      font-size:14px;
-    }
-
-    .container{
-      width:90%;
-      max-width:1100px;
-      margin:30px auto;
-    }
-
-    .card{
-      background:#1f1f1f;
-      padding:25px;
-      border-radius:14px;
-      margin-bottom:25px;
-      box-shadow:0 0 12px rgba(0,0,0,0.4);
-    }
-
-    h2{
-      margin-bottom:20px;
-      color:#ff4d4d;
-    }
+@media(max-width:700px){
 
     .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:15px;
-    }
-
-    input, select{
-      width:100%;
-      padding:12px;
-      border:none;
-      border-radius:8px;
-      background:#2c2c2c;
-      color:white;
-      font-size:15px;
-    }
-
-    button{
-      width:100%;
-      margin-top:20px;
-      padding:14px;
-      border:none;
-      border-radius:8px;
-      background:#b30000;
-      color:white;
-      font-size:16px;
-      font-weight:bold;
-      cursor:pointer;
-      transition:0.2s;
-    }
-
-    button:hover{
-      background:#e60000;
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      margin-top:15px;
-    }
-
-    th, td{
-      padding:14px;
-      text-align:left;
-      border-bottom:1px solid #333;
-      font-size:14px;
-    }
-
-    th{
-      color:#ff6666;
-    }
-
-    .good{
-      color:lightgreen;
-      font-weight:bold;
-    }
-
-    .warning{
-      color:gold;
-      font-weight:bold;
-    }
-
-    .bad{
-      color:#ff4d4d;
-      font-weight:bold;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:15px;
-      margin-bottom:25px;
-    }
-
-    .stat-box{
-      background:#1f1f1f;
-      padding:20px;
-      border-radius:14px;
-      text-align:center;
-    }
-
-    .stat-box h3{
-      color:#ff6666;
-      margin-bottom:10px;
-    }
-
-    .stat-box p{
-      font-size:24px;
-      font-weight:bold;
-    }
-
-    @media(max-width:700px){
-
-      .grid{
         grid-template-columns:1fr;
-      }
-
-      .stats{
-        grid-template-columns:1fr;
-      }
-
-      table{
-        font-size:12px;
-      }
-
     }
 
-  </style>
+}
+
+</style>
 </head>
 
 <body>
 
+<div class="bg1"></div>
+<div class="bg2"></div>
+
 <header>
-  <h1>Flores Car Care Tracker</h1>
-  <p>Track maintenance, mileage, costs, and service intervals.</p>
+
+    <div>
+
+        <div class="logo">
+            Flores <span>Car Care</span>
+        </div>
+
+        <div class="tagline">
+            Never Miss Your Car’s Care Appointment
+        </div>
+
+    </div>
+
 </header>
 
 <div class="container">
 
-  <!-- Stats -->
+    <!-- Stats -->
 
-  <div class="stats">
+    <div class="stats">
 
-    <div class="stat-box">
-      <h3>Total Services</h3>
-      <p id="totalServices">0</p>
-    </div>
+        <div class="stat-card">
 
-    <div class="stat-box">
-      <h3>Total Spent</h3>
-      <p id="totalSpent">$0</p>
-    </div>
+            <h3>Total Vehicles</h3>
 
-    <div class="stat-box">
-      <h3>Overdue Services</h3>
-      <p id="overdueCount">0</p>
-    </div>
+            <p id="vehicleCount">0</p>
 
-  </div>
+        </div>
 
-  <!-- Form -->
+        <div class="stat-card">
 
-  <div class="card">
+            <h3>Total Services</h3>
 
-    <h2>Add Maintenance Record</h2>
+            <p id="serviceCount">0</p>
 
-    <div class="grid">
+        </div>
 
-      <input type="text" id="car" placeholder="Vehicle (Example: 2007 Acura TL)">
+        <div class="stat-card">
 
-      <input type="text" id="owner" placeholder="Owner Name">
+            <h3>Total Spent</h3>
 
-      <select id="service">
+            <p id="moneySpent">$0</p>
 
-        <option>Oil Change</option>
-        <option>Timing Belt</option>
-        <option>Transmission Service</option>
-        <option>Brake Service</option>
-        <option>Coolant Flush</option>
-        <option>Tire Rotation</option>
-        <option>Spark Plugs</option>
+        </div>
 
-      </select>
+        <div class="stat-card">
 
-      <input type="number" id="mileage" placeholder="Current Mileage">
+            <h3>Garage Value</h3>
 
-      <input type="number" id="lastService" placeholder="Mileage of Last Service">
+            <p id="garageValue">$0</p>
 
-      <input type="number" id="cost" placeholder="Service Cost ($)">
+        </div>
 
     </div>
 
-    <button onclick="addService()">Add Service Record</button>
+    <!-- Main -->
 
-  </div>
+    <div class="main-grid">
 
-  <!-- Table -->
+        <!-- Add Vehicle -->
 
-  <div class="card">
+        <div class="card">
 
-    <h2>Maintenance History</h2>
+            <h2>Add Vehicle</h2>
 
-    <table>
+            <div class="grid">
 
-      <thead>
+                <input type="text" id="make" placeholder="Make">
 
-        <tr>
-          <th>Vehicle</th>
-          <th>Owner</th>
-          <th>Service</th>
-          <th>Mileage</th>
-          <th>Cost</th>
-          <th>Status</th>
-        </tr>
+                <input type="text" id="model" placeholder="Model">
 
-      </thead>
+                <input type="number" id="year" placeholder="Year">
 
-      <tbody id="tableBody">
+                <input type="number" id="tradeValue" placeholder="Trade-In Value">
 
-      </tbody>
+                <input type="number" id="mileage" placeholder="Mileage">
 
-    </table>
+            </div>
 
-  </div>
+            <button onclick="addVehicle()">
+                Add Vehicle To Garage
+            </button>
+
+        </div>
+
+        <!-- Add Service -->
+
+        <div class="card">
+
+            <h2>Add Maintenance</h2>
+
+            <div class="grid">
+
+                <select id="vehicleSelect">
+
+                    <option>Select Vehicle</option>
+
+                </select>
+
+                <select id="serviceType">
+
+                    <option>Oil Change</option>
+                    <option>Timing Belt</option>
+                    <option>Transmission Service</option>
+                    <option>Brake Service</option>
+                    <option>Coolant Flush</option>
+                    <option>Spark Plugs</option>
+
+                </select>
+
+                <input type="number" id="currentMileage" placeholder="Current Mileage">
+
+                <input type="number" id="lastMileage" placeholder="Mileage At Last Service">
+
+            </div>
+
+            <button onclick="addService()">
+                Add Maintenance Record
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Garage -->
+
+    <div class="card" style="margin-top:25px;">
+
+        <h2>Your Garage</h2>
+
+        <div class="garage-grid" id="garageGrid">
+
+        </div>
+
+    </div>
+
+    <!-- Maintenance Timeline -->
+
+    <div class="card" style="margin-top:25px;">
+
+        <h2>Maintenance Timeline</h2>
+
+        <div id="serviceList">
+
+        </div>
+
+    </div>
 
 </div>
 
 <script>
 
-  let totalServices = 0;
-  let totalSpent = 0;
-  let overdueServices = 0;
+let vehicleCount = 0;
+let serviceCount = 0;
+let totalGarageValue = 0;
 
-  function addService(){
+function getLogo(make){
 
-    const car = document.getElementById("car").value;
-    const owner = document.getElementById("owner").value;
-    const service = document.getElementById("service").value;
+    make = make.toLowerCase();
 
-    const mileage = parseInt(document.getElementById("mileage").value);
-    const lastService = parseInt(document.getElementById("lastService").value);
+    const logos = {
 
-    const cost = parseFloat(document.getElementById("cost").value);
+        honda:"https://upload.wikimedia.org/wikipedia/commons/7/7b/Honda-logo.svg",
+
+        acura:"https://upload.wikimedia.org/wikipedia/commons/2/27/Acura_logo.svg",
+
+        toyota:"https://upload.wikimedia.org/wikipedia/commons/9/9d/Toyota_carlogo.svg",
+
+        lexus:"https://upload.wikimedia.org/wikipedia/commons/2/2d/Lexus_division_emblem.svg",
+
+        bmw:"https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg",
+
+        audi:"https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg"
+
+    };
+
+    return logos[make] || "https://cdn-icons-png.flaticon.com/512/744/744465.png";
+
+}
+
+function addVehicle(){
+
+    const make = document.getElementById("make").value;
+
+    const model = document.getElementById("model").value;
+
+    const year = document.getElementById("year").value;
+
+    const tradeValue = parseFloat(document.getElementById("tradeValue").value);
+
+    const mileage = document.getElementById("mileage").value;
+
+    if(make === "" || model === "" || year === "" || isNaN(tradeValue)){
+
+        alert("Please fill out all fields.");
+
+        return;
+
+    }
+
+    vehicleCount++;
+
+    totalGarageValue += tradeValue;
+
+    document.getElementById("vehicleCount").innerText = vehicleCount;
+
+    document.getElementById("garageValue").innerText =
+    "$" + totalGarageValue.toLocaleString();
+
+    const logo = getLogo(make);
+
+    const vehicleName = `${year} ${make} ${model}`;
+
+    // Garage Card
+
+    const vehicleCard = `
+
+    <div class="garage-card">
+
+        <img src="${logo}">
+
+        <h3>${vehicleName}</h3>
+
+        <p>Mileage: ${parseInt(mileage).toLocaleString()} mi</p>
+
+        <p>Trade-In Value: $${tradeValue.toLocaleString()}</p>
+
+    </div>
+
+    `;
+
+    document.getElementById("garageGrid").innerHTML += vehicleCard;
+
+    // Dropdown
+
+    const option = document.createElement("option");
+
+    option.text = vehicleName;
+
+    document.getElementById("vehicleSelect").add(option);
+
+    // Clear Inputs
+
+    document.getElementById("make").value = "";
+    document.getElementById("model").value = "";
+    document.getElementById("year").value = "";
+    document.getElementById("tradeValue").value = "";
+    document.getElementById("mileage").value = "";
+
+}
+
+function addService(){
+
+    const vehicle =
+    document.getElementById("vehicleSelect").value;
+
+    const service =
+    document.getElementById("serviceType").value;
+
+    const currentMileage =
+    parseInt(document.getElementById("currentMileage").value);
+
+    const lastMileage =
+    parseInt(document.getElementById("lastMileage").value);
 
     if(
-      car === "" ||
-      owner === "" ||
-      isNaN(mileage) ||
-      isNaN(lastService) ||
-      isNaN(cost)
+        vehicle === "Select Vehicle" ||
+        isNaN(currentMileage) ||
+        isNaN(lastMileage)
     ){
-      alert("Please complete all fields.");
-      return;
+
+        alert("Please fill out all maintenance fields.");
+
+        return;
+
     }
 
-    const milesSince = mileage - lastService;
+    serviceCount++;
 
-    let interval = 0;
+    document.getElementById("serviceCount").innerText =
+    serviceCount;
 
-    if(service === "Oil Change"){
-      interval = 5000;
-    }
-    else if(service === "Timing Belt"){
-      interval = 100000;
-    }
-    else if(service === "Transmission Service"){
-      interval = 30000;
-    }
-    else if(service === "Spark Plugs"){
-      interval = 60000;
-    }
-    else{
-      interval = 30000;
+    let interval = 30000;
+
+    if(service === "Oil Change") interval = 5000;
+
+    if(service === "Timing Belt") interval = 100000;
+
+    if(service === "Transmission Service") interval = 30000;
+
+    if(service === "Spark Plugs") interval = 60000;
+
+    const usedMiles = currentMileage - lastMileage;
+
+    let remaining = interval - usedMiles;
+
+    let percent = (usedMiles / interval) * 100;
+
+    if(percent > 100){
+
+        percent = 100;
+
     }
 
     let status = "";
     let statusClass = "";
 
-    if(milesSince >= interval){
+    if(remaining <= 0){
 
-      status = "OVERDUE";
-      statusClass = "bad";
-      overdueServices++;
+        status = "OVERDUE";
+
+        statusClass = "bad";
+
+        remaining = 0;
 
     }
-    else if(milesSince >= interval * 0.8){
+    else if(remaining <= interval * 0.2){
 
-      status = "DUE SOON";
-      statusClass = "warning";
+        status = "DUE SOON";
+
+        statusClass = "warning";
 
     }
     else{
 
-      status = "GOOD";
-      statusClass = "good";
+        status = "GOOD";
+
+        statusClass = "good";
 
     }
 
-    totalServices++;
-    totalSpent += cost;
+    const serviceCard = `
 
-    document.getElementById("totalServices").innerText = totalServices;
-    document.getElementById("totalSpent").innerText = "$" + totalSpent.toFixed(2);
-    document.getElementById("overdueCount").innerText = overdueServices;
+    <div class="service-item">
 
-    const row = `
-      <tr>
-        <td>${car}</td>
-        <td>${owner}</td>
-        <td>${service}</td>
-        <td>${mileage.toLocaleString()} mi</td>
-        <td>$${cost.toFixed(2)}</td>
-        <td class="${statusClass}">${status}</td>
-      </tr>
+        <h3>${service}</h3>
+
+        <p>${vehicle}</p>
+
+        <p style="margin-top:8px;">
+
+            Remaining:
+
+            <span class="${statusClass}">
+                ${remaining.toLocaleString()} miles
+            </span>
+
+        </p>
+
+        <p style="margin-top:6px;">
+
+            Status:
+
+            <span class="${statusClass}">
+                ${status}
+            </span>
+
+        </p>
+
+        <div class="progress">
+
+            <div class="progress-bar"
+            style="width:${percent}%">
+
+            </div>
+
+        </div>
+
+    </div>
+
     `;
 
-    document.getElementById("tableBody").innerHTML += row;
+    document.getElementById("serviceList").innerHTML +=
+    serviceCard;
 
-    // Clear Inputs
+    // Clear
 
-    document.getElementById("car").value = "";
-    document.getElementById("owner").value = "";
-    document.getElementById("mileage").value = "";
-    document.getElementById("lastService").value = "";
-    document.getElementById("cost").value = "";
+    document.getElementById("currentMileage").value = "";
 
-  }
+    document.getElementById("lastMileage").value = "";
+
+}
 
 </script>
 
