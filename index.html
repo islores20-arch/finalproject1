@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -20,22 +19,22 @@
 
 body{
     font-family:'Inter',sans-serif;
-    background:#0a0a0a;
+    background:#0b0b0b;
     color:white;
     overflow-x:hidden;
 }
 
 /* Background Glow */
 
-.glow{
+.glow1{
     position:fixed;
-    width:600px;
-    height:600px;
-    background:rgba(255,0,0,0.12);
+    width:500px;
+    height:500px;
+    background:rgba(255,0,0,0.15);
     filter:blur(140px);
     border-radius:50%;
-    top:-200px;
-    right:-200px;
+    top:-150px;
+    right:-100px;
     z-index:-1;
 }
 
@@ -47,15 +46,14 @@ header{
     justify-content:space-between;
     align-items:center;
 
+    background:rgba(10,10,10,0.8);
+
     position:sticky;
     top:0;
 
-    background:rgba(10,10,10,0.75);
     backdrop-filter:blur(12px);
 
     border-bottom:1px solid rgba(255,255,255,0.05);
-
-    z-index:999;
 }
 
 .logo{
@@ -68,7 +66,7 @@ header{
 }
 
 .tagline{
-    color:#9f9f9f;
+    color:#999;
     font-size:13px;
 }
 
@@ -76,7 +74,7 @@ header{
 
 .container{
     width:90%;
-    max-width:1400px;
+    max-width:1350px;
     margin:40px auto;
 }
 
@@ -85,32 +83,25 @@ header{
 .stats{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
+    gap:18px;
     margin-bottom:25px;
 }
 
 .stat{
     background:#141414;
-    padding:20px;
     border-radius:18px;
+    padding:22px;
     border:1px solid rgba(255,255,255,0.05);
-
-    transition:0.3s ease;
-}
-
-.stat:hover{
-    transform:translateY(-3px);
-    border-color:rgba(255,0,0,0.3);
 }
 
 .stat h3{
-    color:#9f9f9f;
+    color:#999;
     font-size:13px;
-    margin-bottom:10px;
 }
 
 .stat p{
     font-size:30px;
+    margin-top:10px;
     font-weight:700;
 }
 
@@ -122,19 +113,15 @@ header{
     gap:20px;
 }
 
-/* Cards */
-
 .card{
     background:#141414;
-    border:1px solid rgba(255,255,255,0.05);
-
-    border-radius:22px;
-
+    border-radius:20px;
     padding:24px;
+    border:1px solid rgba(255,255,255,0.05);
 }
 
 .card h2{
-    margin-bottom:18px;
+    margin-bottom:15px;
 }
 
 /* Inputs */
@@ -143,47 +130,42 @@ input,
 select{
     width:100%;
     padding:14px;
-
-    margin-top:12px;
+    margin-top:10px;
 
     border:none;
     outline:none;
 
-    border-radius:14px;
+    border-radius:12px;
 
     background:#1d1d1d;
     color:white;
 
-    transition:0.2s ease;
+    transition:0.2s;
 }
 
 input:focus,
 select:focus{
-    border:1px solid rgba(255,0,0,0.5);
+    border:1px solid #ff2d2d;
 }
 
-/* Button */
+/* Buttons */
 
 button{
     width:100%;
-
-    padding:15px;
-
-    margin-top:18px;
+    padding:14px;
+    margin-top:15px;
 
     border:none;
-    border-radius:14px;
+    border-radius:12px;
 
-    background:linear-gradient(135deg,#ff1a1a,#a80000);
+    background:linear-gradient(135deg,#ff1a1a,#b30000);
 
     color:white;
-
-    font-size:15px;
     font-weight:600;
 
     cursor:pointer;
 
-    transition:0.25s ease;
+    transition:0.25s;
 }
 
 button:hover{
@@ -196,19 +178,17 @@ button:hover{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:15px;
-    margin-top:18px;
+    margin-top:15px;
 }
 
 .vehicle{
     background:#111;
-
-    border-radius:18px;
-
+    border-radius:16px;
     padding:18px;
 
     border:1px solid rgba(255,255,255,0.05);
 
-    transition:0.3s ease;
+    transition:0.25s;
 }
 
 .vehicle:hover{
@@ -217,8 +197,7 @@ button:hover{
 }
 
 .vehicle h3{
-    margin-bottom:10px;
-    font-size:18px;
+    margin-bottom:8px;
 }
 
 .vehicle p{
@@ -227,39 +206,30 @@ button:hover{
     margin-top:5px;
 }
 
-/* Service */
+/* Services */
 
 .service{
-    background:#111;
-
-    padding:18px;
-
-    border-radius:16px;
-
     margin-top:15px;
+    background:#111;
+    padding:16px;
+    border-radius:16px;
 
     border:1px solid rgba(255,255,255,0.05);
 }
 
-.progress{
+.bar{
     width:100%;
     height:8px;
-
     background:#222;
-
     border-radius:20px;
-
     overflow:hidden;
-
     margin-top:10px;
 }
 
 .fill{
     height:100%;
-    background:linear-gradient(to right,#ff1a1a,#ff6666);
+    background:linear-gradient(90deg,#ff1a1a,#ff6666);
 }
-
-/* Status */
 
 .good{
     color:#4dff91;
@@ -270,7 +240,7 @@ button:hover{
 }
 
 .bad{
-    color:#ff5c5c;
+    color:#ff4d4d;
 }
 
 /* Mobile */
@@ -289,7 +259,7 @@ button:hover{
 
 <body>
 
-<div class="glow"></div>
+<div class="glow1"></div>
 
 <header>
 
@@ -300,7 +270,7 @@ button:hover{
         </div>
 
         <div class="tagline">
-            Never Miss Your Car’s Care Appointment
+            Never Miss Your Car's Care Appointment
         </div>
 
     </div>
@@ -334,7 +304,7 @@ button:hover{
 
 <div class="grid">
 
-    <!-- Vehicle -->
+    <!-- Add Vehicle -->
 
     <div class="card">
 
@@ -354,35 +324,27 @@ button:hover{
 
     </div>
 
-    <!-- Maintenance -->
+    <!-- Add Service -->
 
     <div class="card">
 
         <h2>Add Maintenance</h2>
 
         <select id="vehicleSelect">
-
             <option>Select Vehicle</option>
-
         </select>
 
         <select id="serviceType">
-
             <option>Oil Change</option>
             <option>Timing Belt</option>
             <option>Transmission Service</option>
-            <option>Brakes</option>
+            <option>Brake Service</option>
             <option>Spark Plugs</option>
-
         </select>
 
-        <input type="number"
-        id="currentMileage"
-        placeholder="Current Mileage">
+        <input type="number" id="currentMileage" placeholder="Current Mileage">
 
-        <input type="number"
-        id="lastMileage"
-        placeholder="Mileage At Last Service">
+        <input type="number" id="lastMileage" placeholder="Mileage At Last Service">
 
         <button onclick="addService()">
             Add Maintenance
@@ -394,21 +356,25 @@ button:hover{
 
 <!-- Garage -->
 
-<div class="card" style="margin-top:25px;">
+<div class="card" style="margin-top:20px;">
 
     <h2>Your Garage</h2>
 
-    <div class="garage" id="garage"></div>
+    <div class="garage" id="garage">
+
+    </div>
 
 </div>
 
-<!-- Maintenance Timeline -->
+<!-- Maintenance -->
 
-<div class="card" style="margin-top:25px;">
+<div class="card" style="margin-top:20px;">
 
     <h2>Maintenance Timeline</h2>
 
-    <div id="services"></div>
+    <div id="services">
+
+    </div>
 
 </div>
 
@@ -416,119 +382,45 @@ button:hover{
 
 <script>
 
-/* DATA */
+let vehicleCount = 0;
+let serviceCount = 0;
+let garageValue = 0;
 
-let vehicles = [];
-let services = [];
+/* Estimate Vehicle Value */
 
-/* LOAD STORAGE */
+function estimateValue(make,year,mileage){
 
-window.onload = function(){
+    let value = 22000;
 
-    if(localStorage.getItem("vehicles")){
+    const premiumBrands = [
+        "bmw",
+        "audi",
+        "lexus",
+        "acura",
+        "infiniti"
+    ];
 
-        vehicles =
-        JSON.parse(localStorage.getItem("vehicles"));
-
-        renderVehicles();
-
+    if(
+        premiumBrands.includes(make.toLowerCase())
+    ){
+        value += 8000;
     }
 
-    if(localStorage.getItem("services")){
+    let age = 2026 - year;
 
-        services =
-        JSON.parse(localStorage.getItem("services"));
+    value -= age * 1200;
 
-        renderServices();
+    value -= mileage * 0.05;
 
+    if(value < 2500){
+        value = 2500;
     }
+
+    return Math.round(value);
 
 }
 
-/* SAVE */
-
-function save(){
-
-    localStorage.setItem(
-        "vehicles",
-        JSON.stringify(vehicles)
-    );
-
-    localStorage.setItem(
-        "services",
-        JSON.stringify(services)
-    );
-
-}
-
-/* SMART VALUE ESTIMATOR */
-
-function estimateValue(make, model, year, mileage){
-
-    make = make.toLowerCase();
-
-    let currentYear = 2026;
-
-    let age = currentYear - year;
-
-    let base = 22000;
-
-    /* Luxury */
-
-    if(
-        make.includes("acura") ||
-        make.includes("lexus") ||
-        make.includes("bmw") ||
-        make.includes("audi") ||
-        make.includes("infiniti")
-    ){
-
-        base = 32000;
-
-    }
-
-    /* Economy */
-
-    if(
-        make.includes("toyota") ||
-        make.includes("honda")
-    ){
-
-        base = 26000;
-
-    }
-
-    /* Sports Models */
-
-    if(
-        model.toLowerCase().includes("type s") ||
-        model.toLowerCase().includes("type-s") ||
-        model.toLowerCase().includes("si") ||
-        model.toLowerCase().includes("m3") ||
-        model.toLowerCase().includes("supra")
-    ){
-
-        base += 12000;
-
-    }
-
-    /* Depreciation */
-
-    base -= age * 1200;
-
-    base -= mileage * 0.05;
-
-    if(base < 2500){
-
-        base = 2500;
-
-    }
-
-    return Math.round(base);
-
-}
-
-/* ADD VEHICLE */
+/* Add Vehicle */
 
 function addVehicle(){
 
@@ -551,32 +443,56 @@ function addVehicle(){
         !mileage
     ){
 
-        alert("Please fill out all fields.");
+        alert("Please fill all fields.");
 
         return;
 
     }
 
-    /* AUTO VALUE CALCULATION */
+    let value =
+    estimateValue(make,year,mileage);
 
-    let estimatedValue =
-    estimateValue(make, model, year, mileage);
+    let vehicleName =
+    `${year} ${make} ${model}`;
 
-    let vehicle = {
+    vehicleCount++;
 
-        make,
-        model,
-        year,
-        mileage,
-        estimatedValue
+    garageValue += value;
 
-    };
+    document.getElementById("vehicleCount").innerText =
+    vehicleCount;
 
-    vehicles.push(vehicle);
+    document.getElementById("garageValue").innerText =
+    "$" + garageValue.toLocaleString();
 
-    save();
+    /* Garage Card */
 
-    renderVehicles();
+    document.getElementById("garage").innerHTML += `
+
+        <div class="vehicle">
+
+            <h3>${vehicleName}</h3>
+
+            <p>Mileage: ${mileage.toLocaleString()} mi</p>
+
+            <p>
+                Estimated Value:
+                $${value.toLocaleString()}
+            </p>
+
+        </div>
+
+    `;
+
+    /* Add To Dropdown */
+
+    let option =
+    document.createElement("option");
+
+    option.text = vehicleName;
+
+    document.getElementById("vehicleSelect")
+    .add(option);
 
     /* Clear Inputs */
 
@@ -590,78 +506,14 @@ function addVehicle(){
 
 }
 
-/* RENDER VEHICLES */
-
-function renderVehicles(){
-
-    let garage =
-    document.getElementById("garage");
-
-    let select =
-    document.getElementById("vehicleSelect");
-
-    garage.innerHTML = "";
-
-    select.innerHTML =
-    "<option>Select Vehicle</option>";
-
-    let totalValue = 0;
-
-    vehicles.forEach((car,index)=>{
-
-        totalValue += car.estimatedValue;
-
-        garage.innerHTML += `
-
-        <div class="vehicle">
-
-            <h3>
-                ${car.year} ${car.make} ${car.model}
-            </h3>
-
-            <p>
-                Mileage:
-                ${car.mileage.toLocaleString()} mi
-            </p>
-
-            <p>
-                Estimated Value:
-                $${car.estimatedValue.toLocaleString()}
-            </p>
-
-        </div>
-
-        `;
-
-        let option =
-        document.createElement("option");
-
-        option.value = index;
-
-        option.text =
-        `${car.year} ${car.make} ${car.model}`;
-
-        select.add(option);
-
-    });
-
-    document.getElementById("vehicleCount")
-    .innerText = vehicles.length;
-
-    document.getElementById("garageValue")
-    .innerText =
-    "$" + totalValue.toLocaleString();
-
-}
-
-/* ADD SERVICE */
+/* Add Service */
 
 function addService(){
 
-    let vehicleIndex =
+    let vehicle =
     document.getElementById("vehicleSelect").value;
 
-    let type =
+    let service =
     document.getElementById("serviceType").value;
 
     let currentMileage =
@@ -671,24 +523,35 @@ function addService(){
     parseInt(document.getElementById("lastMileage").value);
 
     if(
-        vehicleIndex === "Select Vehicle" ||
+        vehicle === "Select Vehicle" ||
         !currentMileage ||
         !lastMileage
     ){
 
-        alert("Please fill out all maintenance fields.");
+        alert("Fill all maintenance fields.");
 
         return;
 
     }
 
+    serviceCount++;
+
+    document.getElementById("serviceCount").innerText =
+    serviceCount;
+
     let interval = 30000;
 
-    if(type === "Oil Change") interval = 5000;
+    if(service === "Oil Change"){
+        interval = 5000;
+    }
 
-    if(type === "Timing Belt") interval = 100000;
+    if(service === "Timing Belt"){
+        interval = 100000;
+    }
 
-    if(type === "Spark Plugs") interval = 60000;
+    if(service === "Spark Plugs"){
+        interval = 60000;
+    }
 
     let used =
     currentMileage - lastMileage;
@@ -696,53 +559,68 @@ function addService(){
     let remaining =
     interval - used;
 
+    if(remaining < 0){
+        remaining = 0;
+    }
+
     let percent =
     Math.min((used / interval) * 100,100);
 
     let status = "GOOD";
-    let statusClass = "good";
+    let className = "good";
 
-    if(remaining <= 0){
-
-        remaining = 0;
+    if(remaining === 0){
 
         status = "OVERDUE";
-
-        statusClass = "bad";
+        className = "bad";
 
     }
-    else if(remaining <= interval * 0.2){
+    else if(remaining < interval * 0.2){
 
         status = "DUE SOON";
-
-        statusClass = "warn";
+        className = "warn";
 
     }
 
-    let service = {
+    document.getElementById("services").innerHTML += `
 
-        vehicle:
-        vehicles[vehicleIndex],
+        <div class="service">
 
-        type,
-        remaining,
-        percent,
-        status,
-        statusClass
+            <h3>${service}</h3>
 
-    };
+            <p>${vehicle}</p>
 
-    services.push(service);
+            <p class="${className}">
+                Remaining:
+                ${remaining.toLocaleString()} miles
+            </p>
 
-    save();
+            <div class="bar">
 
-    renderServices();
+                <div
+                class="fill"
+                style="width:${percent}%">
+
+                </div>
+
+            </div>
+
+            <p class="${className}" style="margin-top:10px;">
+                ${status}
+            </p>
+
+        </div>
+
+    `;
+
+    document.getElementById("currentMileage").value = "";
+
+    document.getElementById("lastMileage").value = "";
 
 }
 
-/* RENDER SERVICES */
+</script>
 
-function renderServices(){
+</body>
 
-    let container =
-    document.getElementById("services
+</html>
