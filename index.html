@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -26,15 +27,15 @@ body{
 
 /* Background Glow */
 
-.glow1{
+.glow{
     position:fixed;
-    width:500px;
-    height:500px;
-    background:rgba(255,0,0,0.15);
-    filter:blur(140px);
+    width:600px;
+    height:600px;
+    background:rgba(255,0,0,0.12);
+    filter:blur(150px);
     border-radius:50%;
-    top:-150px;
-    right:-100px;
+    top:-200px;
+    right:-150px;
     z-index:-1;
 }
 
@@ -70,11 +71,11 @@ header{
     font-size:13px;
 }
 
-/* Layout */
+/* Container */
 
 .container{
     width:90%;
-    max-width:1350px;
+    max-width:1400px;
     margin:40px auto;
 }
 
@@ -89,9 +90,15 @@ header{
 
 .stat{
     background:#141414;
-    border-radius:18px;
     padding:22px;
+    border-radius:18px;
     border:1px solid rgba(255,255,255,0.05);
+    transition:0.3s;
+}
+
+.stat:hover{
+    transform:translateY(-3px);
+    border-color:#ff2d2d;
 }
 
 .stat h3{
@@ -100,23 +107,25 @@ header{
 }
 
 .stat p{
-    font-size:30px;
     margin-top:10px;
+    font-size:30px;
     font-weight:700;
 }
 
 /* Main Grid */
 
-.grid{
+.mainGrid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:20px;
 }
 
+/* Cards */
+
 .card{
     background:#141414;
-    border-radius:20px;
     padding:24px;
+    border-radius:20px;
     border:1px solid rgba(255,255,255,0.05);
 }
 
@@ -132,13 +141,13 @@ select{
     padding:14px;
     margin-top:10px;
 
+    background:#1d1d1d;
+    color:white;
+
     border:none;
     outline:none;
 
     border-radius:12px;
-
-    background:#1d1d1d;
-    color:white;
 
     transition:0.2s;
 }
@@ -161,6 +170,7 @@ button{
     background:linear-gradient(135deg,#ff1a1a,#b30000);
 
     color:white;
+
     font-weight:600;
 
     cursor:pointer;
@@ -181,61 +191,67 @@ button:hover{
     margin-top:15px;
 }
 
-.vehicle{
+.vehicleCard{
     background:#111;
     border-radius:16px;
     padding:18px;
 
     border:1px solid rgba(255,255,255,0.05);
 
-    transition:0.25s;
+    transition:0.3s;
 }
 
-.vehicle:hover{
+.vehicleCard:hover{
     transform:translateY(-4px);
     border-color:#ff2d2d;
 }
 
-.vehicle h3{
+.vehicleCard h3{
     margin-bottom:8px;
 }
 
-.vehicle p{
+.vehicleCard p{
     color:#aaa;
     font-size:14px;
-    margin-top:5px;
+    margin-top:6px;
 }
 
 /* Services */
 
-.service{
+.serviceCard{
     margin-top:15px;
     background:#111;
-    padding:16px;
     border-radius:16px;
+    padding:16px;
 
     border:1px solid rgba(255,255,255,0.05);
 }
 
-.bar{
+.progress{
     width:100%;
     height:8px;
+
     background:#222;
+
     border-radius:20px;
+
     overflow:hidden;
+
     margin-top:10px;
 }
 
-.fill{
+.progressFill{
     height:100%;
     background:linear-gradient(90deg,#ff1a1a,#ff6666);
 }
+
+/* Status Colors */
 
 .good{
     color:#4dff91;
 }
 
-.warn{
+.warning{
     color:#ffd24d;
 }
 
@@ -247,7 +263,7 @@ button:hover{
 
 @media(max-width:900px){
 
-    .grid{
+    .mainGrid{
         grid-template-columns:1fr;
     }
 
@@ -259,7 +275,7 @@ button:hover{
 
 <body>
 
-<div class="glow1"></div>
+<div class="glow"></div>
 
 <header>
 
@@ -302,7 +318,7 @@ button:hover{
 
 <!-- Main Grid -->
 
-<div class="grid">
+<div class="mainGrid">
 
     <!-- Add Vehicle -->
 
@@ -310,13 +326,25 @@ button:hover{
 
         <h2>Add Vehicle</h2>
 
-        <input type="text" id="make" placeholder="Make">
+        <input
+        type="text"
+        id="make"
+        placeholder="Vehicle Make">
 
-        <input type="text" id="model" placeholder="Model">
+        <input
+        type="text"
+        id="model"
+        placeholder="Vehicle Model">
 
-        <input type="number" id="year" placeholder="Year">
+        <input
+        type="number"
+        id="year"
+        placeholder="Vehicle Year">
 
-        <input type="number" id="mileage" placeholder="Mileage">
+        <input
+        type="number"
+        id="mileage"
+        placeholder="Current Mileage">
 
         <button onclick="addVehicle()">
             Add Vehicle
@@ -324,27 +352,37 @@ button:hover{
 
     </div>
 
-    <!-- Add Service -->
+    <!-- Add Maintenance -->
 
     <div class="card">
 
         <h2>Add Maintenance</h2>
 
         <select id="vehicleSelect">
+
             <option>Select Vehicle</option>
+
         </select>
 
         <select id="serviceType">
+
             <option>Oil Change</option>
             <option>Timing Belt</option>
             <option>Transmission Service</option>
             <option>Brake Service</option>
             <option>Spark Plugs</option>
+
         </select>
 
-        <input type="number" id="currentMileage" placeholder="Current Mileage">
+        <input
+        type="number"
+        id="currentMileage"
+        placeholder="Current Mileage">
 
-        <input type="number" id="lastMileage" placeholder="Mileage At Last Service">
+        <input
+        type="number"
+        id="lastServiceMileage"
+        placeholder="Mileage At Last Service">
 
         <button onclick="addService()">
             Add Maintenance
@@ -372,7 +410,7 @@ button:hover{
 
     <h2>Maintenance Timeline</h2>
 
-    <div id="services">
+    <div id="serviceList">
 
     </div>
 
@@ -382,41 +420,44 @@ button:hover{
 
 <script>
 
+/* Totals */
+
 let vehicleCount = 0;
 let serviceCount = 0;
-let garageValue = 0;
+let totalGarageValue = 0;
 
 /* Estimate Vehicle Value */
 
-function estimateValue(make,year,mileage){
+function estimateVehicleValue(make,year,mileage){
 
-    let value = 22000;
+    let baseValue = 22000;
 
-    const premiumBrands = [
+    const luxuryBrands = [
         "bmw",
         "audi",
-        "lexus",
         "acura",
-        "infiniti"
+        "lexus",
+        "infiniti",
+        "mercedes"
     ];
 
     if(
-        premiumBrands.includes(make.toLowerCase())
+        luxuryBrands.includes(make.toLowerCase())
     ){
-        value += 8000;
+        baseValue += 8000;
     }
 
     let age = 2026 - year;
 
-    value -= age * 1200;
+    baseValue -= age * 1200;
 
-    value -= mileage * 0.05;
+    baseValue -= mileage * 0.05;
 
-    if(value < 2500){
-        value = 2500;
+    if(baseValue < 2500){
+        baseValue = 2500;
     }
 
-    return Math.round(value);
+    return Math.round(baseValue);
 
 }
 
@@ -425,64 +466,84 @@ function estimateValue(make,year,mileage){
 function addVehicle(){
 
     let make =
-    document.getElementById("make").value;
+    document.getElementById("make").value.trim();
 
     let model =
-    document.getElementById("model").value;
+    document.getElementById("model").value.trim();
 
     let year =
-    parseInt(document.getElementById("year").value);
+    parseInt(
+        document.getElementById("year").value
+    );
 
     let mileage =
-    parseInt(document.getElementById("mileage").value);
+    parseInt(
+        document.getElementById("mileage").value
+    );
 
     if(
-        !make ||
-        !model ||
-        !year ||
-        !mileage
+        make === "" ||
+        model === "" ||
+        isNaN(year) ||
+        isNaN(mileage)
     ){
 
-        alert("Please fill all fields.");
+        alert("Please fill out all fields.");
 
         return;
 
     }
 
-    let value =
-    estimateValue(make,year,mileage);
+    /* Estimate Value */
+
+    let estimatedValue =
+    estimateVehicleValue(
+        make,
+        year,
+        mileage
+    );
+
+    /* Vehicle Name */
 
     let vehicleName =
     `${year} ${make} ${model}`;
 
+    /* Update Stats */
+
     vehicleCount++;
 
-    garageValue += value;
+    totalGarageValue += estimatedValue;
 
     document.getElementById("vehicleCount").innerText =
     vehicleCount;
 
     document.getElementById("garageValue").innerText =
-    "$" + garageValue.toLocaleString();
+    "$" + totalGarageValue.toLocaleString();
 
-    /* Garage Card */
+    /* Vehicle Card */
 
-    document.getElementById("garage").innerHTML += `
+    let vehicleHTML = `
 
-        <div class="vehicle">
+        <div class="vehicleCard">
 
             <h3>${vehicleName}</h3>
 
-            <p>Mileage: ${mileage.toLocaleString()} mi</p>
+            <p>
+                Mileage:
+                ${mileage.toLocaleString()} mi
+            </p>
 
             <p>
-                Estimated Value:
-                $${value.toLocaleString()}
+                Estimated Trade-In Value:
+                $${estimatedValue.toLocaleString()}
             </p>
 
         </div>
 
     `;
+
+    document.getElementById("garage").innerHTML +=
+    vehicleHTML;
 
     /* Add To Dropdown */
 
@@ -506,7 +567,7 @@ function addVehicle(){
 
 }
 
-/* Add Service */
+/* Add Maintenance */
 
 function addService(){
 
@@ -517,18 +578,22 @@ function addService(){
     document.getElementById("serviceType").value;
 
     let currentMileage =
-    parseInt(document.getElementById("currentMileage").value);
+    parseInt(
+        document.getElementById("currentMileage").value
+    );
 
     let lastMileage =
-    parseInt(document.getElementById("lastMileage").value);
+    parseInt(
+        document.getElementById("lastServiceMileage").value
+    );
 
     if(
         vehicle === "Select Vehicle" ||
-        !currentMileage ||
-        !lastMileage
+        isNaN(currentMileage) ||
+        isNaN(lastMileage)
     ){
 
-        alert("Fill all maintenance fields.");
+        alert("Please complete all maintenance fields.");
 
         return;
 
@@ -538,6 +603,8 @@ function addService(){
 
     document.getElementById("serviceCount").innerText =
     serviceCount;
+
+    /* Service Intervals */
 
     let interval = 30000;
 
@@ -553,69 +620,92 @@ function addService(){
         interval = 60000;
     }
 
-    let used =
+    /* Remaining Mileage */
+
+    let milesUsed =
     currentMileage - lastMileage;
 
     let remaining =
-    interval - used;
+    interval - milesUsed;
 
     if(remaining < 0){
         remaining = 0;
     }
 
-    let percent =
-    Math.min((used / interval) * 100,100);
+    /* Progress */
+
+    let progress =
+    (milesUsed / interval) * 100;
+
+    if(progress > 100){
+        progress = 100;
+    }
+
+    /* Status */
 
     let status = "GOOD";
-    let className = "good";
+    let statusClass = "good";
 
     if(remaining === 0){
 
         status = "OVERDUE";
-        className = "bad";
+        statusClass = "bad";
 
     }
     else if(remaining < interval * 0.2){
 
         status = "DUE SOON";
-        className = "warn";
+        statusClass = "warning";
 
     }
 
-    document.getElementById("services").innerHTML += `
+    /* Service Card */
 
-        <div class="service">
+    let serviceHTML = `
+
+        <div class="serviceCard">
 
             <h3>${service}</h3>
 
             <p>${vehicle}</p>
 
-            <p class="${className}">
+            <p class="${statusClass}">
+
                 Remaining:
                 ${remaining.toLocaleString()} miles
+
             </p>
 
-            <div class="bar">
+            <div class="progress">
 
                 <div
-                class="fill"
-                style="width:${percent}%">
+                class="progressFill"
+                style="width:${progress}%">
 
                 </div>
 
             </div>
 
-            <p class="${className}" style="margin-top:10px;">
+            <p
+            class="${statusClass}"
+            style="margin-top:10px;">
+
                 ${status}
+
             </p>
 
         </div>
 
     `;
 
+    document.getElementById("serviceList").innerHTML +=
+    serviceHTML;
+
+    /* Clear Inputs */
+
     document.getElementById("currentMileage").value = "";
 
-    document.getElementById("lastMileage").value = "";
+    document.getElementById("lastServiceMileage").value = "";
 
 }
 
